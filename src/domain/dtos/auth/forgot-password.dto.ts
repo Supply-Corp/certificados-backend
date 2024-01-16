@@ -1,17 +1,31 @@
 import { Request } from "express";
-import { ValidateField } from "../../utils/validate-fields.util";
+import { ValidateField } from "../../../config";
+import { Schema } from "express-validator";
 
 export class ForgotPasswordDto {
-  
-    constructor() {}
+    
+  constructor(public email: string) {}
 
-    private static schema = {};
+  private static schema: Schema = {
+    email: {
+      trim: true,
+      notEmpty: {
+        bail: true,
+        errorMessage: "Correo electrónico requerido",
+      },
+      isEmail: {
+        bail: true,
+        errorMessage: "Correo electrónico no es válido",
+      },
+    },
+  };
 
-    static async create(req: Request): Promise<[unknown?, ForgotPasswordDto?]> {
-        const field = await ValidateField.create( this.schema, req );
-        if( !field ) return [field];
+  static async create(req: Request): Promise<[unknown?, ForgotPasswordDto?]> {
+    const { email } = req.body;
 
-        return [undefined, new ForgotPasswordDto()];
-    }
+    const field = await ValidateField.create(this.schema, req);
+    if (field) return [field];
 
+    return [undefined, new ForgotPasswordDto( email )];
+  }
 }

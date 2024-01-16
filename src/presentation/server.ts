@@ -1,5 +1,6 @@
 import express from "express";
 import { ServerRoutes } from "./routes";
+import { corsMiddleware } from "./middlewares/cors.middleware";
 
 interface Options {
   port: number;
@@ -21,6 +22,10 @@ export class Server {
 
     // middlewares
     this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+
+    //cors
+    this.app.use(corsMiddleware())
 
     // public folder
     this.app.use(express.static(this.public_path));
