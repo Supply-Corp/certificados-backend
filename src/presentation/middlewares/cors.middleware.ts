@@ -2,7 +2,7 @@ import cors from 'cors'
 
 const ACCEPTED_ORIGINS = [
   'http://localhost:5173',
-  'https://certificados.institutoelevateperu.com/'
+  'https://certificados.institutoelevateperu.com'
 ]
 
 export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({
