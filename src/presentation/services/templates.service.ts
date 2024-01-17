@@ -19,21 +19,22 @@ export class TemplatesService {
         const { count: total, rows: templates } = await TemplatesModel.findAndCountAll({
             offset: (page - 1) * limit,
             limit: limit,
+            order: [['id', 'DESC']],
             where: {
                 state: States.ACTIVE,
-                ...(search && {
-                    [Op.and]: {
-                        name: {
-                            startsWith: `%${ search }`
-                        }
-                    }
-                })
+                [Op.and]: [
+                    {
+                        ...(search && {
+                            name: {
+                                [Op.like]: `%${ search }%`
+                            }
+                        }),
+                    },
+                ],
             }
         })
 
         const pagination = PaginationService.get(page, limit, total, '/api/templates');
-
-        console.log({templates})
 
         return {
             ...pagination,
@@ -88,13 +89,14 @@ export class TemplatesService {
             if( dto.file) {
                 const { fileName } = await this.fileUploadService.singleUpload( dto.file, 'templates');
                 if( !fileName ) throw CustomError.badRequest('No fue posible almacenar el documento');
-    
+
+                await this.removeFile(exist.file);
+
                 const update = await exist.update({ where: { id: dto.id }, 
                     name: dto.name,
                     file: fileName
                 });
     
-                await this.removeFile(exist.file);
                  
                 return {
                     ...TemplateEntity.fromObject(update)
@@ -130,6 +132,8 @@ export class TemplatesService {
                 where: { id }, 
                 state: 'DELETED'
             });
+            
+            await this.removeFile( exist.file );
 
             return {
                 ...TemplateEntity.fromObject(update)
@@ -141,13 +145,13 @@ export class TemplatesService {
     }
 
     async removeFile( fileName: string  ) {
-        const pathFile = path.resolve(__dirname, `../../../uploads/templates/${fileName}`);
-
+        const pathFile = path.resolve(__dirname, `../../../public/templates/${ fileName }`);
+        console.log({pathFile})
         setTimeout(() => {
             if( fs.existsSync(pathFile) ){
                 fs.unlinkSync(pathFile);
             }
-        }, 1000);
+        }, 500);
 
     }
 

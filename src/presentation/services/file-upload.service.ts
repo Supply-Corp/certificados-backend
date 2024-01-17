@@ -11,6 +11,8 @@ export class FileUploadService {
     ) {}
 
     checkFolder( folder: string ) {
+        console.log({ folder })
+        console.log(!fs.existsSync( folder ))
         if( !fs.existsSync( folder )) {
             fs.mkdirSync( folder );
         }
