@@ -36,26 +36,6 @@ export class AuthService {
     };
   }
 
-  async registerUser(dto: RegisterDto) {
-    const exist = await UserModel.findOne({ where: { email: dto.email } });
-    if (exist) throw CustomError.notFound("El email ya se encuentra registrado.");
-
-    try {
-      const register = await UserModel.create({
-        ...dto,
-        password: HashAdapter.hash(dto.password),
-      });
-
-      const { password, ...userEntity } = UserEntity.fromObject(register.toJSON());
-
-      const token = await JwtAdapter.generateToken({ id: userEntity.id });
-
-      return { user: userEntity, token: token };
-    } catch (error) {
-      throw CustomError.internalServe(`${error}`);
-    }
-  }
-
   async forgotPasswordUser(dto: ForgotPasswordDto) {
 
     const exist = await UserModel.findOne({ where: { email: dto.email }});

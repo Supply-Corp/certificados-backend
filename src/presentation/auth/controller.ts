@@ -21,16 +21,6 @@ export class AuthController {
         .catch(error => HandleErrorService.create(error, res));
     }
 
-    registerUser = async ( req: Request, res: Response ) => {
-
-        const [error, dto] = await RegisterDto.create(req);
-        if( error ) return res.status(400).json({ error });
-
-        this.authService.registerUser( dto! )
-        .then((user) => { return res.status(200).json( user ) })
-        .catch(error => HandleErrorService.create(error, res));
-    }
-
     forgotPasswordUser = async ( req: Request, res: Response ) => {
 
         const [error, dto] = await ForgotPasswordDto.create(req);

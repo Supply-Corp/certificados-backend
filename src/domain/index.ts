@@ -10,6 +10,7 @@ export * from './entities/user-course.entity';
 
 export * from './dtos/auth/login.dto';
 export * from './dtos/auth/register.dto';
+export * from './dtos/auth/update-user.dto';
 export * from './dtos/auth/forgot-password.dto';
 
 

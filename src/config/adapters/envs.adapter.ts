@@ -19,7 +19,7 @@ export const envs = {
 
     DATABASE_HOST: get('DATABASE_HOST').required().asString(),
     DATABASE_USER: get('DATABASE_USER').required().asString(),
-    DATABASE_PASSWORD: get('DATABASE_PASSWORD').required().asString(),
+    DATABASE_PASSWORD: get('DATABASE_PASSWORD').asString(),
     DATABASE_PORT: get('DATABASE_PORT').required().asPortNumber(),
     DATABASE_DIALECT: get('DATABASE_DIALECT').required().asString(),
     DATABASE_NAME: get('DATABASE_NAME').required().asString(),

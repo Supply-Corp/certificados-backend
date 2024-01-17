@@ -1,11 +1,13 @@
 import { Op } from "sequelize";
-import { Uuid } from "../../config";
+import { HashAdapter, JwtAdapter, Uuid } from "../../config";
 import {
   CreateUserCourseDto,
   CustomError,
   PaginationDto,
+  RegisterDto,
   UpdateCoursesDto,
   UpdateUserCourseDto,
+  UpdateUserDto,
   UserCoursesEntity,
   UserEntity,
 } from "../../domain";
@@ -34,6 +36,7 @@ export class UserCoursesService {
               },
             },
           }),
+          role: 'USER'
         },
       });
 
@@ -50,6 +53,63 @@ export class UserCoursesService {
         users: usersInformation,
       };
 
+    } catch (error) {
+      throw CustomError.internalServe(`${error}`);
+    }
+  }
+
+  async registerUser(dto: RegisterDto) {
+    const exist = await UserModel.findOne({ where: { email: dto.email } });
+    if (exist) throw CustomError.notFound("El email ya se encuentra registrado.");
+
+    try {
+      const register = await UserModel.create({
+        ...dto,
+        password: HashAdapter.hash(dto.password),
+      });
+
+      const { password, ...userEntity } = UserEntity.fromObject(register.toJSON());
+
+      return { ...userEntity };
+    } catch (error) {
+      throw CustomError.internalServe(`${error}`);
+    }
+  }
+
+  async updateUser(dto: UpdateUserDto) {
+
+    const exist = await UserModel.findOne({ where: { id: dto.id } });
+    if ( !exist ) throw CustomError.notFound("No es posible editar el usuario.");
+
+    if( exist.email !== dto.email ) {
+      const validateEmail = await UserModel.findOne({ where: { email: dto.email } });
+      if( validateEmail ) return CustomError.notFound('El email ya se encuentra registrado');
+    }
+
+    try {
+      const register = await exist.update({
+        ...dto,
+        // password: dto.password ? HashAdapter.hash(dto.password) : undefined
+      });
+
+      const { password, ...userEntity } = UserEntity.fromObject(register.toJSON());
+
+      return { ...userEntity };
+    } catch (error) {
+      throw CustomError.internalServe(`${error}`);
+    }
+  }
+
+  async deleteUser(id: number) {
+    const exist = await UserModel.findOne({ where: { id } });
+    if (!exist) throw CustomError.notFound("No existe usuario");
+
+    try {
+      await exist.destroy();
+
+      return {
+        ...UserEntity.fromObject(exist),
+      };
     } catch (error) {
       throw CustomError.internalServe(`${error}`);
     }

@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../../../data/mysql/sequelize/index';
+import { HashAdapter } from "../../../config";
 
 const Role = {
     USER: "USER",
@@ -64,5 +65,10 @@ UserModel.init(
       },
     },
     { sequelize, modelName: "user" }
-  );
+);
   
+UserModel.beforeUpdate((user, options) => {
+  if (user.changed('password')) {
+    user.password = HashAdapter.hash(user.password);
+  }
+});

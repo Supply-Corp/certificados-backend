@@ -18,7 +18,6 @@ export class AuthRoutes {
     const controller = new AuthController(service);
 
     router.post("/login", controller.loginUser);
-    router.post("/register", controller.registerUser);
     router.post("/forgot-password", controller.forgotPasswordUser);
     router.post("/recovery-password", controller.recoveryPassword);
     router.get('/user', SessionMiddleware.validateJwt, controller.user)
