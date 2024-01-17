@@ -38,6 +38,8 @@ export class TemplatesController {
         const [error, dto] = await CreateTemplateDto.create(req);
         if( error ) return res.status(400).json({ error });
 
+        console.log(dto)
+
         this.templateService.createTemplate( dto! )
         .then(uploaded => { return res.json(uploaded) })
         .catch(error => { return HandleErrorService.create(error, res) });

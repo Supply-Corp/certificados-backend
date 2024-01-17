@@ -24,6 +24,7 @@ export class FileUploadService {
         extensions: string[] = ['jpg', 'jpeg', 'png']
     ) {
 
+        console.log({ file, folder})
         try {
             const fileExtension = file.mimetype.split('/').at(1) ?? '';
             if( !extensions.includes(fileExtension) ) { 
