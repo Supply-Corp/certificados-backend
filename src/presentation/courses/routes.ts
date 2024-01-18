@@ -14,6 +14,7 @@ export class CoursesRoutes {
     router.use(SessionMiddleware.validateJwt);
 
     router.get("/", controller.listCourse);
+    router.get("/all", controller.allCourses);
     router.get("/:id", controller.getCourse);
     router.post("/", controller.createCourse);
     router.put("/:id", controller.updateCourse);

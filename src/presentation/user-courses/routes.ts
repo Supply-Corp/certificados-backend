@@ -13,8 +13,6 @@ export class UserCoursesRoutes {
 
         const service = new UserCoursesService()
         const controller = new UserCoursesController(service);
-        
-
 
         router.get("/", controller.listUser);
         router.post("/user", controller.registerUser);

@@ -20,6 +20,13 @@ export class CoursesController {
         .catch(error => HandleErrorService.create(error, res));
     }
 
+    allCourses = async (req: Request, res: Response) => {
+        
+        this.coursesService.allCourses()
+        .then((user) => { return res.status(200).json( user ) })
+        .catch(error => HandleErrorService.create(error, res));
+    }
+
     getCourse = async (req: Request, res: Response) => {
 
         const id = req.params.id;

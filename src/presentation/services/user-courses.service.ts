@@ -119,23 +119,29 @@ export class UserCoursesService {
     const { page, limit } = dto;
 
     try {
-        const { count: total, rows: courses } =
-        await UserCoursesModel.findAndCountAll({
-          offset: (page - 1) * limit,
-          limit: limit,
-          where: {
-            userId: id,
-          },
-          include: ['template', 'course'],
-        });
+      const user = await UserModel.findOne({ where: { id } });
+      if( !user ) throw CustomError.badRequest('El usuario no existe');
+      
+      const { count: total, rows: courses } =
+      await UserCoursesModel.findAndCountAll({
+        offset: (page - 1) * limit,
+        limit: limit,
+        where: {
+          userId: id,
+        },
+        include: ['template', 'course'],
+      });
 
-        const pagination = PaginationService.get(page, limit, total, `/api/user-courses/${id}`);
-        const usersCourses = courses.map(UserCoursesEntity.fromObject);
+      const pagination = PaginationService.get(page, limit, total, `/api/user-courses/${ id }`);
+      const usersCourses = courses.map(UserCoursesEntity.fromObject);
 
-        return {
-          ...pagination,
-          courses: usersCourses,
-        };
+      const { password, ...userEntity } = UserEntity.fromObject(user);
+
+      return {
+        ...pagination,
+        courses: usersCourses,
+        user: userEntity
+      };
     } catch (error) {
       throw CustomError.internalServe(`${error}`);
     }

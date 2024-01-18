@@ -45,6 +45,18 @@ export class CoursesService {
         };
     }
 
+    async allCourses() {
+
+        const courses = await CoursesModel.findAll({
+            order: [['id', 'DESC']],
+            where: { state: States.ACTIVE }
+        });
+
+        return {
+            courses: courses.map(CourseEntity.fromObject),
+        };
+    }
+
     async getCourse(id: number) {
     const course = await CoursesModel.findOne({ where: { id } });
     if (!course) throw CustomError.notFound("El cursos solicitado no existe");

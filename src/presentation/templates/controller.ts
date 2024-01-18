@@ -18,6 +18,13 @@ export class TemplatesController {
         .catch(error => { return HandleErrorService.create(error, res) });
     }
 
+    allTemplate = async (req: Request, res: Response) => {
+        
+        this.templateService.allTemplate()
+        .then((user) => { return res.status(200).json( user ) })
+        .catch(error => HandleErrorService.create(error, res));
+    }
+
     getTemplate = async (req: Request, res: Response) => {
 
         const id = req.params.id;
@@ -37,8 +44,6 @@ export class TemplatesController {
 
         const [error, dto] = await CreateTemplateDto.create(req);
         if( error ) return res.status(400).json({ error });
-
-        console.log(dto)
 
         this.templateService.createTemplate( dto! )
         .then(uploaded => { return res.json(uploaded) })

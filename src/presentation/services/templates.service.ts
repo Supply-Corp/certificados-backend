@@ -42,6 +42,18 @@ export class TemplatesService {
         }
     }
 
+    async allTemplate() {
+
+        const data = await TemplatesModel.findAll({
+            order: [['id', 'DESC']],
+            where: { state: States.ACTIVE }
+        });
+
+        return {
+            templates: data.map(TemplateEntity.fromObject)
+        }
+    }
+
     async getTemplate( id: number ) {
 
         const exist = await TemplatesModel.findOne({ where: { id } });
