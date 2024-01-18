@@ -10,3 +10,4 @@ export * from './pagination.service';
 export * from './file-upload.service';
 
 export * from './user-courses.service';
+export * from './courses-modules.service';
