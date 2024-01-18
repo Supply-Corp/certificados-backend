@@ -1,11 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../../../data/mysql/sequelize/index';
-import { CoursesModel } from "./courses.model";
-
-export enum States {
-  ACTIVE = 'ACTIVE',
-  DELETED = 'DELETED',
-};
+import { CoursesModel, States } from "./courses.model";
 
 export class CoursesModulesModel extends Model {
   declare id: number;
