@@ -63,7 +63,7 @@ export class CertifiedService {
                         display: block;
                         max-width: 830px;
                         text-align: justify;
-                        margin: -50px auto 0;
+                        margin: -40px auto 0;
                         text-align: left;
                         font-size: 16px;
                     }
@@ -77,7 +77,7 @@ export class CertifiedService {
                         display: block;
                         max-width: 830px;
                         text-align: justify;
-                        margin: -50px auto 0;
+                        margin: -40px auto 0;
                         text-align: left;
                         font-size: 16px;
                     }
@@ -92,7 +92,7 @@ export class CertifiedService {
                         display: block;
                         max-width: 830px;
                         text-align: justify;
-                        margin: 0px auto 0;
+                        margin: 10px auto 0;
                         text-align: left;
                         font-size: 16px;
                     }
