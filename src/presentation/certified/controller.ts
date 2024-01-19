@@ -9,11 +9,11 @@ export class CertifiedController {
         private certifiedService: CertifiedService
     ) {}
 
-    generateCertified = async (req: Request, res: Response) => {
+    // generateCertified = async (req: Request, res: Response) => {
 
-        await this.certifiedService.generate()
-        .then(cert => res.status(200).json(cert))
-        .catch(error => HandleErrorService.create(error, res))
-    }
+    //     await this.certifiedService.generate()
+    //     .then(cert => res.status(200).json(cert))
+    //     .catch(error => HandleErrorService.create(error, res))
+    // }
 
 }
