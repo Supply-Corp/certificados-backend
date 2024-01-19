@@ -65,7 +65,7 @@ export class CertifiedService {
                         text-align: justify;
                         margin: -50px auto 0;
                         text-align: left;
-                        font-size: 18px;
+                        font-size: 16px;
                     }
                     h2 {
                         font-size: 60px;
@@ -79,7 +79,7 @@ export class CertifiedService {
                         text-align: justify;
                         margin: -50px auto 0;
                         text-align: left;
-                        font-size: 18px;
+                        font-size: 16px;
                     }
                     h3 {
                         max-width: 800px;
@@ -94,7 +94,7 @@ export class CertifiedService {
                         text-align: justify;
                         margin: 0px auto 0;
                         text-align: left;
-                        font-size: 18px;
+                        font-size: 16px;
                     }
                 </style>
             </head>
