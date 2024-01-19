@@ -42,8 +42,6 @@ export class CertifiedService {
                         text-align: center;
                         margin: 0;
                         padding:0;
-                        font-style; normal;
-                        font-weight:200!important;
                     }
                     img {
                         margin-top: 60px;
@@ -72,6 +70,7 @@ export class CertifiedService {
                         margin-top: 10px;
                         text-transform: capitalize;
                         font-family: 'Great Vibes';
+                        font-weight: 100;
                     }
                     .p-two {
                         display: block;
