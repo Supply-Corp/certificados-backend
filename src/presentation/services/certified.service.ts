@@ -42,6 +42,8 @@ export class CertifiedService {
                         text-align: center;
                         margin: 0;
                         padding:0;
+                        font-style; normal;
+                        font-weight:lighter;
                     }
                     img {
                         margin-top: 60px;
