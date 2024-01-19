@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import puppeteer from "puppeteer";
-import { CustomError } from "../../domain";
+import { CustomError, numeroALetras } from "../../domain";
 import { envs } from "../../config";
 import { UserCoursesModel } from "../../domain/models";
 import dayjs from 'dayjs';
@@ -15,7 +15,6 @@ export class CertifiedService {
     
     async generate(certified: UserCoursesModel) {
 
-        console.log(certified)
         const template = certified.template?.certified;
 
         const dayInit = dayjs(certified.course?.initialDate).format('DD');
@@ -25,7 +24,12 @@ export class CertifiedService {
         const monthEnd = dayjs(certified.course?.endDate).format('MMMM');
         const yearEnd = dayjs(certified.course?.endDate).format('YYYY');
 
+        const dayNow = dayjs().format('DD');
+        const monthNow = dayjs().format('MMMM');
+        const yearNow = dayjs().format('YYYY');
+
         const qr = await QRCode.toDataURL(certified.identifier)
+        const hours = numeroALetras(certified.hours);
 
         const htmlContent = `<!DOCTYPE html>
             <html lang="en">
@@ -96,6 +100,12 @@ export class CertifiedService {
                         text-align: left;
                         font-size: 16px;
                     }
+                    .p-four {
+                        max-width: 830px;
+                        display: block;
+                        margin: 30px auto 0;
+                        text-align: right;
+                    }
                 </style>
             </head>
             <body>
@@ -108,9 +118,11 @@ export class CertifiedService {
                 <p class="p-two">En mérito de haber culminado satisfactoriamente y aprobado el Diploma de Alta Especialización
                 Profesional en:</p>
                 <h3>${ certified.course?.name }</h3>
-                <p class="p-tree">Realizado del ${ dayInit } de ${ monthInit } al ${ dayEnd } de ${ monthEnd } del ${yearEnd}, con una duración total de cien (${ certified.hours })
+                <p class="p-tree">Realizado del ${ dayInit } de ${ monthInit } al ${ dayEnd } de ${ monthEnd } del ${yearEnd}, con una duración total de ${ hours } (${ certified.hours })
                 horas académicas lectivas, cumpliendo con los requisitos académicos exigidos por el respectivo
                 diploma de alta especialización.</p>
+
+                <p class="p-four">Lima, a los ${ dayNow} días del mes de ${ monthNow } del año ${ yearNow } </p>
             </body>
             </html>`;
 

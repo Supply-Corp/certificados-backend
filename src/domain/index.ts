@@ -30,3 +30,5 @@ export * from './dtos/templates/update-template.dto';
 
 export * from './dtos/user-courses/create-user-courses.dto';
 export * from './dtos/user-courses/update-user-courses.dto';
+
+export * from './utils/number-format.util'
