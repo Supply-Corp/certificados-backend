@@ -51,7 +51,7 @@ export class CertifiedService {
                         font-size: 12px;
                     }
                     h1 {
-                        font-size: 60px;
+                        font-size: 68px;
                         margin-top: 0;
                         color: #a47517;
                         font-family: "Times New Roman", Times, serif;
