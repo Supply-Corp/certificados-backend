@@ -64,7 +64,7 @@ export class CertifiedService {
                     .p-one {
                         display: block;
                         max-width: 830px;
-                        text-align: justify;
+                        text-align: justify!important;
                         margin: -40px auto 0;
                         text-align: left;
                         font-size: 16px;
@@ -79,7 +79,7 @@ export class CertifiedService {
                     .p-two {
                         display: block;
                         max-width: 830px;
-                        text-align: justify;
+                        text-align: justify!important;
                         margin: -40px auto 0;
                         text-align: left;
                         font-size: 16px;
@@ -95,7 +95,7 @@ export class CertifiedService {
                     .p-tree {
                         display: block;
                         max-width: 830px;
-                        text-align: justify;
+                        text-align: justify!important;
                         margin: 10px auto 0;
                         text-align: left;
                         font-size: 16px;
