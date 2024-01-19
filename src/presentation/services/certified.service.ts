@@ -126,7 +126,9 @@ export class CertifiedService {
 
         if(!fs.existsSync( destination )) fs.mkdirSync( destination );
         
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            executablePath: '/usr/bin/chromium-browser',
+        });
         const page = await browser.newPage();
         await page.setContent(htmlContent, { waitUntil: 'networkidle2' });
         await page.pdf({ 
