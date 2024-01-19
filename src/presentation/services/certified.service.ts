@@ -53,11 +53,11 @@ export class CertifiedService {
                         font-size: 12px;
                     }
                     h1 {
-                        font-size: 70px;
+                        font-size: 60px;
                         margin-top: 0;
                         color: #a47517;
                         font-family: "Times New Roman", Times, serif;
-                        font-weight: light;
+                        font-weight: 100;
                     }
                     .p-one {
                         display: block;
@@ -65,7 +65,7 @@ export class CertifiedService {
                         text-align: justify;
                         margin: -50px auto 0;
                         text-align: left;
-                        font-size: 20px;
+                        font-size: 18px;
                     }
                     h2 {
                         font-size: 60px;
@@ -79,7 +79,7 @@ export class CertifiedService {
                         text-align: justify;
                         margin: -50px auto 0;
                         text-align: left;
-                        font-size: 20px;
+                        font-size: 18px;
                     }
                     h3 {
                         max-width: 800px;
@@ -94,7 +94,7 @@ export class CertifiedService {
                         text-align: justify;
                         margin: 0px auto 0;
                         text-align: left;
-                        font-size: 20px;
+                        font-size: 18px;
                     }
                 </style>
             </head>
