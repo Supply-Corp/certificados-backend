@@ -2,6 +2,8 @@ import { CustomError } from "../../domain";
 import { UserCoursesModel, UserModel } from "../../domain/models";
 import { UserCoursesEntity } from '../../domain/entities/user-course.entity';
 import { CertifiedService } from "./certified.service";
+import path from 'path';
+import fs from 'fs';
 
 
 export class StudentService {
@@ -36,6 +38,10 @@ export class StudentService {
         if( !certified ) throw CustomError.notFound('No se encontró información acerca del certificado');
 
         try {
+
+            const destination = path.resolve(__dirname, `../../../public/certified/${ certified.identifier }.pdf`);
+
+            if(fs.existsSync( destination )) return `${ certified.identifier }.pdf`;
 
             return await this.certified.generate( certified.toJSON() )
 
