@@ -86,7 +86,7 @@ export class CertifiedService {
                         margin-top: 0px;
                         margin: auto;
                         height: fit-content;
-                        font-weight: 300;
+                        font-weight: 400;
                     }
                     .p-tree {
                         display: block;
