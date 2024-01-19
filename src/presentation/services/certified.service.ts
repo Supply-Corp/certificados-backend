@@ -127,9 +127,8 @@ export class CertifiedService {
         if(!fs.existsSync( destination )) fs.mkdirSync( destination );
         
         const browser = await puppeteer.launch({ 
-            headless: false,
             executablePath: '/usr/bin/chromium-browser', 
-         });
+            args: [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ] });
         const page = await browser.newPage();
         await page.setContent(htmlContent, { waitUntil: 'networkidle2' });
         await page.pdf({ 
