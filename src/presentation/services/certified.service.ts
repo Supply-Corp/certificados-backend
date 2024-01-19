@@ -43,7 +43,7 @@ export class CertifiedService {
                         margin: 0;
                         padding:0;
                         font-style; normal;
-                        font-weight:lighter;
+                        font-weight:200!important;
                     }
                     img {
                         margin-top: 60px;
