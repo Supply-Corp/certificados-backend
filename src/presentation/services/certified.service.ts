@@ -55,6 +55,7 @@ export class CertifiedService {
                         margin-top: 0;
                         color: #a47517;
                         font-family: "Times New Roman", Times, serif;
+                        font-weight: light;
                     }
                     .p-one {
                         display: block;
