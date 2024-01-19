@@ -23,7 +23,7 @@ export class TemplatesRoutes {
         router.get("/all", controller.allTemplate);
         router.get("/:id", controller.getTemplate);
         router.post("/", FileUploadMiddleware.containFiles, controller.createTemplate);
-        router.put("/:id", controller.updateTemplate);
+        router.put("/:id", FileUploadMiddleware.updateFiles, controller.updateTemplate);
         router.delete("/:id", controller.deleteTemplate);
     
         return router;

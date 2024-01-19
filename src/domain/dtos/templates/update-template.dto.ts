@@ -3,12 +3,17 @@ import { Schema } from "express-validator";
 import { ValidateField } from "../../../config";
 import { Request } from "express";
 
+interface FileInfo {
+  inputName: string,
+  file: UploadedFile
+}
+
 export class UpdateTemplateDto {
 
     constructor(
       public readonly id: number,
       public readonly name?: string,
-      public readonly file?: UploadedFile
+      public readonly files?: FileInfo[]
     ) {}
 
     private static schema: Schema = {
@@ -41,15 +46,17 @@ export class UpdateTemplateDto {
         const { name } = req.body;
         const id = req.params.id;
     
+        const files = req.body.files;
+
         const field = await ValidateField.create(this.schema, req);
         if (field) return [field];
     
-        const file = req.files?.file;
-        if( file && !(file as UploadedFile) ) throw 'la imagen no es valida';
+        if( files && !(files as FileInfo[]) ) throw 'file inválido';
+        console.log({ files})
 
         return [
-          undefined, 
-          new UpdateTemplateDto( +id, name, file as UploadedFile ),
+          undefined,
+          new UpdateTemplateDto( +id, name, files ),
         ];
     }
 

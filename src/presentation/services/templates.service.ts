@@ -5,6 +5,8 @@ import { FileUploadService } from "./file-upload.service";
 import { PaginationService } from './pagination.service';
 import { States, TemplatesModel } from '../../domain/models';
 import { Op } from 'sequelize';
+import { UploadedFile } from 'express-fileupload';
+
 
 export class TemplatesService {
 
@@ -68,14 +70,17 @@ export class TemplatesService {
     }
 
     async createTemplate( dto: CreateTemplateDto )  {
-
-        const { fileName } = await this.fileUploadService.singleUpload( dto.file, 'templates');
-        if( !fileName ) throw CustomError.badRequest('No fue posible almacenar el documento');
+        
+        const fileNames = await Promise.all(
+            dto.files.map(item=> this.fileUploadService.singleUpload(item.file, 'templates'))
+        );
+        if( !fileNames ) throw CustomError.badRequest('Ocurrió un error al almacenar los templates')
 
         try {
             const template = await TemplatesModel.create({
                 name: dto.name,
-                file: fileName
+                certified: fileNames[0].fileName,
+                certifiedConstancy: fileNames[1].fileName
             });
 
             return {
@@ -83,7 +88,8 @@ export class TemplatesService {
             };
 
         } catch (error) {
-            this.removeFile( fileName );
+            console.log(`template error = ${ error }`)
+            fileNames.map(item => this.removeFile(item.fileName));
             throw CustomError.internalServe('Ocurrió un error al registrar el template')
         }
 
@@ -97,21 +103,50 @@ export class TemplatesService {
         if( exist.state === States.DELETED) throw CustomError.notFound('El template solicitado no existe');
 
         try {
+            if( dto.files && dto.files?.length > 0 ) {
 
-            if( dto.file) {
-                const { fileName } = await this.fileUploadService.singleUpload( dto.file, 'templates');
-                if( !fileName ) throw CustomError.badRequest('No fue posible almacenar el documento');
+                if(dto.files.length === 1) {
+                    const fileNm = dto.files[0].inputName;
 
-                await this.removeFile(exist.file);
+                    const { fileName } = await this.fileUploadService.singleUpload( dto.files[0].file, 'templates');
+                    if( !fileName ) throw CustomError.badRequest('No fue posible almacenar el documento');
 
-                const update = await exist.update({ where: { id: dto.id }, 
-                    name: dto.name,
-                    file: fileName
-                });
-    
-                 
-                return {
-                    ...TemplateEntity.fromObject(update)
+                    if( fileNm === 'file' ) {
+                        await this.removeFile(exist.certified);
+                    } else if ( fileNm === 'file2' ) {
+                        await this.removeFile(exist.certifiedConstancy);
+                    }
+
+                    const update = await exist.update({ where: { id: dto.id }, 
+                        name: dto.name,
+                        ...(fileNm === 'file' ? {
+                            certified: fileName
+                        } : {
+                            certifiedConstancy: fileName
+                        })
+                    });
+
+                    return {
+                        ...TemplateEntity.fromObject(update)
+                    }
+                } else if ( dto.files.length === 2 ) {
+                    const fileNames = await Promise.all(
+                        dto.files.map(item=> this.fileUploadService.singleUpload(item.file, 'templates'))
+                    );
+                    if( !fileNames ) throw CustomError.badRequest('Ocurrió un error al almacenar los templates');
+
+                    await this.removeFile(exist.certified);
+                    await this.removeFile(exist.certifiedConstancy);
+
+                    const template = await exist.update({
+                        name: dto.name,
+                        certified: fileNames[0].fileName,
+                        certifiedConstancy: fileNames[1].fileName
+                    });
+
+                    return {
+                        ...TemplateEntity.fromObject(template)
+                    }
                 }
             }
     
@@ -145,7 +180,7 @@ export class TemplatesService {
                 state: 'DELETED'
             });
             
-            await this.removeFile( exist.file );
+            // await this.removeFile( exist.file );
 
             return {
                 ...TemplateEntity.fromObject(update)
@@ -158,7 +193,6 @@ export class TemplatesService {
 
     async removeFile( fileName: string  ) {
         const pathFile = path.resolve(__dirname, `../../../public/templates/${ fileName }`);
-        console.log({pathFile})
         setTimeout(() => {
             if( fs.existsSync(pathFile) ){
                 fs.unlinkSync(pathFile);

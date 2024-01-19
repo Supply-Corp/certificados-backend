@@ -6,7 +6,8 @@ export class TemplatesModel extends Model {
     
     declare id: number;
     declare name: string;
-    declare file: string;
+    declare certified: string;
+    declare certifiedConstancy: string;
     declare state: States;
 
     declare createdAt: Date;
@@ -23,7 +24,10 @@ TemplatesModel.init(
       name: {
         type: DataTypes.STRING
       },
-      file: {
+      certified: {
+        type: DataTypes.STRING
+      },
+      certifiedConstancy: {
         type: DataTypes.STRING
       },
       state: {

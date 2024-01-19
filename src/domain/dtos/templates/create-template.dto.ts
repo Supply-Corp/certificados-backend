@@ -3,11 +3,16 @@ import { Schema } from "express-validator";
 import { ValidateField } from "../../../config";
 import { Request } from "express";
 
+interface FileInfo {
+  fileName: string,
+  file: UploadedFile
+}
+
 export class CreateTemplateDto {
 
     constructor(
         public readonly name: string,
-        public readonly file: UploadedFile
+        public readonly files: FileInfo[]
     ) {}
 
     private static schema: Schema = {
@@ -26,16 +31,16 @@ export class CreateTemplateDto {
     
     static async create(req: Request): Promise<[unknown?, CreateTemplateDto?]> {
       const { name } = req.body;
-      const file = req.body.files.at(0);
-  
+      const files = req.body.files;
+
       const field = await ValidateField.create(this.schema, req);
       if (field) return [field];
   
-      if( !(file as UploadedFile) ) throw 'file inválido';
+      if( !(files as FileInfo[]) ) throw 'file inválido';
 
       return [
         undefined,
-        new CreateTemplateDto( name, file ),
+        new CreateTemplateDto( name, files ),
       ];
     }
 
