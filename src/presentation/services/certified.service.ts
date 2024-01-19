@@ -128,7 +128,6 @@ export class CertifiedService {
         
         const browser = await puppeteer.launch({ 
             headless: 'new',
-            executablePath: '/usr/bin/chromium-browser', 
             args: [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ] });
         const page = await browser.newPage();
         await page.setContent(htmlContent, { waitUntil: 'networkidle2' });
