@@ -117,7 +117,7 @@ export class ConstancyService {
                 </style>
             </head>
             <body>
-                <h1>CONSTANCIA</h1>
+                <h1>${' '}</h1>
                 <p class="p-one">La Dirección Académica de Instituto de Especialización Profesional ELEVATE PERÚ, hace constar que ${ certified.user?.name } ${ certified.user?.lastName } con documento de identidad N° ${ certified.user?.documentNumber }, concluyó satisfactoriamente el Diploma de Alta Especialización en:</p>
                 <h2>${ certified.course?.name }</h2>
 

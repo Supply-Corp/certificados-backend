@@ -111,7 +111,7 @@ export class CertifiedService {
             <body>
                 <img src="${ qr }" width="60" height="60" />
                 <span class="section">${ certified.identifier.split('-')[4] }</span>
-                <h1>DIPLOMA</h1>
+                <h1>${' '}</h1>
                 <p class="p-one">Los que suscriben, la Directora Ejecutiva y la Coordinadora Académica del Instituto de Especialización
                 Profesional ELEVATE PERÚ, otorgan el presente diploma a</p>
                 <h2>${ certified.user?.name } ${ certified.user?.lastName }</h2>
