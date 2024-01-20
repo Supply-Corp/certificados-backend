@@ -67,7 +67,8 @@ export class ConstancyService {
                         display: block;
                         max-width: 620px;
                         text-align: justify!important;
-                        margin: 160px auto 0;
+                        margin: auto;
+                        margin-top: 160px;
                         text-align: left;
                         font-size: 16px;
                     }
