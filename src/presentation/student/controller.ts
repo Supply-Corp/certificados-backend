@@ -25,5 +25,11 @@ export class StudentController {
         .catch(error => { console.log(error); return HandleErrorService.create(error, res) });
     }
 
-
+    studentConstancy = (req: Request, res: Response) => {
+        const identifier = req.params.identifier;
+        
+        this.service.generateConstancy( identifier )
+        .then((user) => { return res.status(200).json( user ) })
+        .catch(error => { console.log(error); return HandleErrorService.create(error, res) });
+    }
 }

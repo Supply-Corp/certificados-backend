@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../../../data/mysql/sequelize/index';
+import { CoursesModulesModel } from "./courses-modules.model";
 
 export enum States {
   ACTIVE = 'ACTIVE',
@@ -48,4 +49,6 @@ CoursesModel.init(
       },
     },
     { sequelize, modelName: "courses" }
-  );
+);
+
+

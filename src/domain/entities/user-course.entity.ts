@@ -11,6 +11,7 @@ export class UserCoursesEntity {
         public readonly templateId: number,
         public readonly courseId: number,
         public readonly hours: number,
+        public readonly points: number,
 
         public readonly user?: UserEntity,
         public readonly template?: TemplateEntity,
@@ -29,9 +30,12 @@ export class UserCoursesEntity {
           templateId,
           courseId,
           hours,
+          points,
+
           user,
           template,
           course,
+
           createdAt,
           updatedAt,
         } = object;
@@ -42,6 +46,7 @@ export class UserCoursesEntity {
         if (!templateId) throw "missing templateId";
         if (!courseId) throw "missing courseId";
         if(!hours) throw "missing hours";
+        if( !points ) throw "missing points"; 
 
         if( user && !(user as UserEntity)) throw "user not is user entity";
         if( template && !(template as TemplateEntity)) throw "template not is template entity";
@@ -55,9 +60,12 @@ export class UserCoursesEntity {
             templateId,
             courseId,
             hours,
+            points,
+
             user,
             template,
             course,
+            
             createdAt,
             updatedAt,
         );

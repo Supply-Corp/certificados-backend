@@ -6,6 +6,7 @@ import { CoursesModel } from "./courses.model";
 import { UserEntity } from "../../entities/user.entity";
 import { TemplateEntity } from "../../entities/template.entity";
 import { CourseEntity } from "../../entities/course.entity";
+import { CourseModulesEntity } from "../../entities/course-modules.entity";
 
 export class UserCoursesModel extends Model {
   declare id: number;
@@ -14,10 +15,12 @@ export class UserCoursesModel extends Model {
   declare templateId: number;
   declare courseId: number;
   declare hours: number;
+  declare points: string;
 
   declare user?: UserEntity;
   declare template?: TemplateEntity;
   declare course?: CourseEntity;
+  declare modules?: CourseModulesEntity[];
 
   declare createdAt: Date;
   declare updatedAt: Date;
@@ -57,6 +60,9 @@ UserCoursesModel.init(
     },
     hours: {
       type: DataTypes.INTEGER,
+    },
+    points: {
+      type: DataTypes.STRING,
     },
     createdAt: {
       type: DataTypes.DATE,

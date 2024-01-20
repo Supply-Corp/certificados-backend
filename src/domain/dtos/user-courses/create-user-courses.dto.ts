@@ -9,7 +9,8 @@ export class CreateUserCourseDto {
         public readonly userId: number,
         public readonly templateId: number,
         public readonly courseId: number,
-        public readonly hours: number
+        public readonly hours: number,
+        public readonly points: string
     ) {}
 
     private static schema: Schema = {
@@ -66,17 +67,24 @@ export class CreateUserCourseDto {
                 errorMessage: "horas es invalido",
             },
         },
+        points: {
+            trim: true,
+            notEmpty: {
+                bail: true,
+                errorMessage: "puntos es requerido",
+            },
+        }
     };
     
     static async create(req: Request): Promise<[unknown?, CreateUserCourseDto?]> {
-      const { userId, templateId, courseId, hours } = req.body;
+      const { userId, templateId, courseId, hours, points } = req.body;
   
       const field = await ValidateField.create(this.schema, req);
       if (field) return [field];
   
       return [
         undefined,
-        new CreateUserCourseDto( +userId, +templateId, +courseId, +hours ),
+        new CreateUserCourseDto( +userId, +templateId, +courseId, +hours, points ),
       ];
     }
 

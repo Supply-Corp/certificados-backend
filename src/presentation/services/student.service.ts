@@ -1,15 +1,17 @@
-import { CustomError } from "../../domain";
-import { UserCoursesModel, UserModel } from "../../domain/models";
+import { CourseModulesEntity, CustomError } from "../../domain";
+import { CoursesModel, CoursesModulesModel, UserCoursesModel, UserModel } from "../../domain/models";
 import { UserCoursesEntity } from '../../domain/entities/user-course.entity';
-import { CertifiedService } from "./certified.service";
 import path from 'path';
 import fs from 'fs';
+import { CertifiedService } from "./certified.service";
+import { ConstancyService } from "./constance.service";
 
 
 export class StudentService {
 
     constructor(
-        private certified: CertifiedService
+        private certified: CertifiedService,
+        private constancy: ConstancyService
     ) {}
 
     async studentCourses( id: number ) {
@@ -51,5 +53,39 @@ export class StudentService {
         }
 
     }
+
+    async generateConstancy( identifier: string ) {
+
+        const certified = await UserCoursesModel.findOne({
+             where: { identifier }, 
+             include: [
+                'template',
+                'course',
+                'user', 
+            ] 
+        });
+        if( !certified ) throw CustomError.notFound('No se encontró información acerca del certificado');
+
+        const modules = await CoursesModulesModel.findAll({ where: { courseId: certified.course?.id, state: 'ACTIVE' } })
+
+        try {
+
+            const newModules =  modules.map(CourseModulesEntity.fromObject);
+
+            const newCertified = { ...certified.toJSON() };
+            newCertified.modules = newModules;
+
+            // const destination = path.resolve(__dirname, `../../../public/constancy/${ certified.identifier }.pdf`);
+            // if(fs.existsSync( destination )) return `${ certified.identifier }.pdf`;
+
+            return await this.constancy.generate( newCertified )
+
+        } catch (error) {
+            console.log(`${ error }`)
+            throw CustomError.internalServe(`${ error }`);
+        }
+
+    }
+
 
 }

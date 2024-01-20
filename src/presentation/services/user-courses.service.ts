@@ -156,11 +156,7 @@ export class UserCoursesService {
         ...dto,
       });
 
-      // const { password, recoveryPassword, ...userInfo } = create.user;
-      // const { user, ...data } = create;
-
       return {
-        // ...data,
         user: create.toJSON(),
       };
     } catch (error) {
@@ -174,13 +170,14 @@ export class UserCoursesService {
     if (!exist) throw CustomError.notFound("No existe el curso del usuario");
 
     try {
-      const { templateId, courseId, hours } = dto;
+      const { templateId, courseId, hours, points } = dto;
 
       const update = await exist.update({
         where: { id },
         templateId: templateId ? templateId : exist.templateId,
         courseId: courseId ? courseId : exist.courseId,
         hours: hours ? hours : exist.hours,
+        points: points ? points : exist.hours,
       });
 
       return {

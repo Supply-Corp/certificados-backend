@@ -9,13 +9,15 @@ import QRCode from 'qrcode'
 import 'dayjs/locale/es';
 dayjs.locale('es')
 
-export class CertifiedService {
+export class ConstancyService {
 
     constructor() {}
     
     async generate(certified: UserCoursesModel) {
 
-        const template = certified.template?.certified;
+        console.log(certified)
+
+        const template = certified.template?.certifiedConstancy;
 
         const dayInit = dayjs(certified.course?.initialDate).format('DD');
         const monthInit = dayjs(certified.course?.initialDate).format('MMMM');
@@ -29,7 +31,7 @@ export class CertifiedService {
         const yearNow = dayjs().format('YYYY');
 
         const qr = await QRCode.toDataURL(certified.identifier)
-        const hours = numeroALetras(certified.hours);
+        const yearNowText = numeroALetras(+yearNow);
 
         const htmlContent = `<!DOCTYPE html>
             <html lang="en">
@@ -56,78 +58,82 @@ export class CertifiedService {
                     }
                     h1 {
                         font-size: 68px;
-                        margin-top: 0;
+                        margin-top: 200px;
                         color: #a47517;
                         font-family: "Times New Roman", Times, serif;
                         font-weight: 100;
                     }
                     .p-one {
                         display: block;
-                        max-width: 830px;
+                        max-width: 620px;
                         text-align: justify!important;
                         margin: -40px auto 0;
                         text-align: left;
                         font-size: 16px;
                     }
                     h2 {
-                        font-size: 60px;
-                        margin-top: 10px;
+                        max-width: 620px;
+                        font-size: 40px;
+                        margin: auto;
+                        margin-top: 30px;
                         text-transform: capitalize;
-                        font-family: 'Great Vibes';
-                        font-weight: 100;
                     }
                     .p-two {
                         display: block;
-                        max-width: 830px;
+                        max-width: 620px;
                         text-align: justify!important;
-                        margin: -40px auto 0;
                         text-align: left;
-                        font-size: 16px;
+                        font-size: 18px;
+                        margin: auto;
+                        margin-top: 18px;
                     }
                     h3 {
                         max-width: 800px;
-                        font-size: 45px;
-                        margin-top: 0px;
+                        font-size: 30px;
                         margin: auto;
+                        margin-top: 50px;
                         height: fit-content;
                         font-weight: 400;
+                        text-align: center;
                     }
                     .p-tree {
                         display: block;
-                        max-width: 830px;
+                        max-width: 620px;
+                        background: red;
                         text-align: justify!important;
                         margin: 10px auto 0;
                         text-align: left;
                         font-size: 16px;
                     }
                     .p-four {
-                        max-width: 830px;
+                        max-width: 620px;
                         display: block;
-                        margin: 30px auto 0;
+                        margin: 10px auto 0;
                         text-align: right;
+                    }
+                    .modules-box {
+                        margin-top: 20px;
                     }
                 </style>
             </head>
             <body>
-                <img src="${ qr }" width="60" height="60" />
-                <span class="section">${ certified.identifier.split('-')[4] }</span>
-                <h1>DIPLOMA</h1>
-                <p class="p-one">Los que suscriben, la Directora Ejecutiva y la Coordinadora Académica del Instituto de Especialización
-                Profesional ELEVATE PERÚ, otorgan el presente diploma a</p>
-                <h2>${ certified.user?.name } ${ certified.user?.lastName }</h2>
-                <p class="p-two">En mérito de haber culminado satisfactoriamente y aprobado el Diploma de Alta Especialización
-                Profesional en:</p>
-                <h3>${ certified.course?.name }</h3>
-                <p class="p-tree">Realizado del ${ dayInit } de ${ monthInit } al ${ dayEnd } de ${ monthEnd } del ${yearEnd}, con una duración total de ${ hours } (${ certified.hours })
-                horas académicas lectivas, cumpliendo con los requisitos académicos exigidos por el respectivo
-                diploma de alta especialización.</p>
+                <h1>CONSTANCIA</h1>
+                <p class="p-one">La Dirección Académica de Instituto de Especialización Profesional ELEVATE PERÚ, hace constar que ${ certified.user?.name } ${ certified.user?.lastName } con documento de identidad N° ${ certified.user?.documentNumber }, concluyó satisfactoriamente el Diploma de Alta Especialización en:</p>
+                <h2>${ certified.course?.name }</h2>
 
-                <p class="p-four">Lima, a los ${ dayNow} días del mes de ${ monthNow } del año ${ yearNow } </p>
+                <div class="modules-box">
+                    ${ certified.modules?.map(item => `<p class="p-two"> ${ item.name } </p>`).join('') }
+                </div>
+
+                <h3>${ certified.points }</h3>
+                <p class="p-four">Lima, a los ${ dayNow} días del mes de ${ monthNow } del año ${ yearNowText } </p>
             </body>
-            </html>`;
+        </html>`;
 
         try {
-            return await this.generatePDF(htmlContent, `public/certified/${certified.identifier}.pdf`, certified.identifier)
+
+            return await this.generatePDF(htmlContent, `public/constancy/${certified.identifier}.pdf`, certified.identifier)
+
         } catch (error) {
             console.log(`${error}`)
 
@@ -137,20 +143,20 @@ export class CertifiedService {
 
     async generatePDF(htmlContent: string, outputPath: string, identifier: string) {
 
-        const destination = path.resolve(__dirname, '../../../public/certified');
+        const destination = path.resolve(__dirname, '../../../public/constancy');
 
         if(!fs.existsSync( destination )) fs.mkdirSync( destination );
         
         const browser = await puppeteer.launch({ 
             headless: 'new',
-            args: [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ] });
+            args: [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ] 
+        });
         const page = await browser.newPage();
         await page.setContent(htmlContent, { waitUntil: 'networkidle2' });
         await page.pdf({ 
             path: outputPath, 
             format: 'A4', 
             printBackground: true, 
-            landscape: true 
         });
         await browser.close();
 

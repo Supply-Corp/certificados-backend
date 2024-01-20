@@ -6,7 +6,7 @@ export class CoursesModulesModel extends Model {
   declare id: number;
   declare name: string;
   declare courseId: number;
-  declare course: CoursesModel;
+  declare course?: CoursesModel;
   declare state: States;
   declare createdAt: Date;
   declare updatedAt: Date;
@@ -45,3 +45,4 @@ CoursesModulesModel.init(
     },
     { sequelize, modelName: "courses_modules" }
   );
+

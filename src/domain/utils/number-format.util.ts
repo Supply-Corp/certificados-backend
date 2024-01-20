@@ -10,8 +10,12 @@ export function numeroALetras(num: number): string {
         return especiales[num.toString()] || decenas[Math.floor(num / 10)] + ' y ' + unidades[num % 10];
     } else if (num < 100) {
         return decenas[Math.floor(num / 10)] + (num % 10 !== 0 ? ' y ' + unidades[num % 10] : '');
-    } else if (num <= 1000) {
+    } else if (num < 1000) {
         return centenas[Math.floor(num / 100)] + (num % 100 !== 0 ? ' ' + numeroALetras(num % 100) : '');
+    } else if (num <= 9999) {
+        let mil = Math.floor(num / 1000);
+        let resto = num % 1000;
+        return unidades[mil] + ' mil ' + (resto !== 0 ? numeroALetras(resto) : '');
     } else {
         return 'Número fuera de rango';
     }

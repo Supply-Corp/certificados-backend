@@ -8,7 +8,8 @@ export class UpdateUserCourseDto {
   constructor(
     public readonly templateId?: number,
     public readonly courseId?: number,
-    public readonly hours?: number
+    public readonly hours?: number,
+    public readonly points?: string
   ) {}
 
   private static schema: Schema = {
@@ -57,14 +58,14 @@ export class UpdateUserCourseDto {
   };
 
   static async create(req: Request): Promise<[unknown?, UpdateUserCourseDto?]> {
-    const { templateId, courseId, hours } = req.body;
+    const { templateId, courseId, hours, points } = req.body;
 
     const field = await ValidateField.create(this.schema, req);
     if (field) return [field];
 
     return [
       undefined,
-      new UpdateUserCourseDto( +templateId, +courseId, +hours),
+      new UpdateUserCourseDto( +templateId, +courseId, +hours, points),
     ];
   }
   

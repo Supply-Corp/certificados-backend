@@ -13,3 +13,5 @@ export * from './user-courses.service';
 export * from './courses-modules.service';
 
 export * from './student.service';
+export * from './certified.service';
+export * from './certified.service';
