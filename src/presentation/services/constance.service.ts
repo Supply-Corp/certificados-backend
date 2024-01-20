@@ -76,7 +76,7 @@ export class ConstancyService {
                         max-width: 620px;
                         font-size: 38px;
                         margin: auto;
-                        margin-top: 30px;
+                        margin-top: 20px;
                         text-transform: capitalize;
                     }
                     .p-two {
