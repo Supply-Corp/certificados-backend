@@ -73,7 +73,7 @@ export class ConstancyService {
                     }
                     h2 {
                         max-width: 620px;
-                        font-size: 40px;
+                        font-size: 38px;
                         margin: auto;
                         margin-top: 30px;
                         text-transform: capitalize;

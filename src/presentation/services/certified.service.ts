@@ -70,7 +70,7 @@ export class CertifiedService {
                         font-size: 16px;
                     }
                     h2 {
-                        font-size: 60px;
+                        font-size: 56px;
                         margin-top: 10px;
                         text-transform: capitalize;
                         font-family: 'Great Vibes';
