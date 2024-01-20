@@ -75,8 +75,8 @@ export class StudentService {
             const newCertified = { ...certified.toJSON() };
             newCertified.modules = newModules;
 
-            // const destination = path.resolve(__dirname, `../../../public/constancy/${ certified.identifier }.pdf`);
-            // if(fs.existsSync( destination )) return `${ certified.identifier }.pdf`;
+            const destination = path.resolve(__dirname, `../../../public/constancy/${ certified.identifier }.pdf`);
+            if(fs.existsSync( destination )) return `${ certified.identifier }.pdf`;
 
             return await this.constancy.generate( newCertified )
 
