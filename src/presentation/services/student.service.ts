@@ -41,9 +41,8 @@ export class StudentService {
 
         try {
 
-            const destination = path.resolve(__dirname, `../../../public/certified/${ certified.identifier }.pdf`);
-
-            if(fs.existsSync( destination )) return `${ certified.identifier }.pdf`;
+            // const destination = path.resolve(__dirname, `../../../public/certified/${ certified.identifier }.pdf`);
+            // if(fs.existsSync( destination )) return `${ certified.identifier }.pdf`;
 
             return await this.certified.generate( certified.toJSON() )
 

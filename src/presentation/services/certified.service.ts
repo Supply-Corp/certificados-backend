@@ -9,10 +9,11 @@ import QRCode from 'qrcode'
 import 'dayjs/locale/es';
 dayjs.locale('es')
 
+
 export class CertifiedService {
 
     constructor() {}
-    
+
     async generate(certified: UserCoursesModel) {
 
         const template = certified.template?.certified;
@@ -28,8 +29,17 @@ export class CertifiedService {
         const monthNow = dayjs().format('MMMM');
         const yearNow = dayjs().format('YYYY');
 
+
         const qr = await QRCode.toDataURL(certified.identifier)
         const hours = numeroALetras(certified.hours);
+
+        const pathFile = path.resolve(__filename, '../vivaldi.font.txt');
+        const pathFileGreat = path.resolve(__filename, '../great-vibes.font.txt');
+        console.log(pathFile)
+
+        const vivaldiFont = fs.readFileSync(pathFile, { encoding: 'utf-8' });
+        const greatVibesFont = fs.readFileSync(pathFileGreat, { encoding: 'utf-8' });
+
 
         const htmlContent = `<!DOCTYPE html>
             <html lang="en">
@@ -38,7 +48,18 @@ export class CertifiedService {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Document</title>
                 <style>
-                    @import url('https://fonts.googleapis.com/css?family=Great+Vibes');
+                    @font-face {
+                        font-family: 'Vivaldi';
+                        src: url(data:font/truetype;charset=utf-8;base64,${vivaldiFont}) format('truetype');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
+                    @font-face {
+                        font-family: 'Great Vibes';
+                        src: url(data:font/truetype;charset=utf-8;base64,${greatVibesFont}) format('truetype');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
 
                     body {
                         background-image: url('${ envs.WEB_SERVICE_URL }/templates/${ template }');
@@ -73,24 +94,28 @@ export class CertifiedService {
                         font-size: 56px;
                         margin-top: 10px;
                         text-transform: capitalize;
-                        font-family: 'Great Vibes';
-                        font-weight: 100;
+                        font-family: 'Vivaldi'!important;
+                        font-weight: 300;
                     }
                     .p-two {
                         display: block;
                         max-width: 830px;
                         text-align: justify!important;
-                        margin: -40px auto 0;
+                        margin: auto;
+                        margin-top: -40px;
+                        margin-bottom: 10px;
                         text-align: left;
                         font-size: 16px;
                     }
                     h3 {
                         max-width: 800px;
                         font-size: 45px;
-                        margin-top: 0px;
+                        margin-top: 20px;
                         margin: auto;
                         height: fit-content;
-                        font-weight: 400;
+                        line-height: 50px;
+                        font-family: 'Great Vibes';
+                        
                     }
                     .p-tree {
                         display: block;
@@ -143,8 +168,11 @@ export class CertifiedService {
         
         const browser = await puppeteer.launch({ 
             headless: 'new',
-            args: [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ] });
+            args: [ '--disable-gpu', '--disable-setuid-sandbox','--disable-web-security', '--no-sandbox', '--no-zygote' ] 
+        });
+        
         const page = await browser.newPage();
+        await page.waitForFunction('document.fonts.ready');
         await page.setContent(htmlContent, { waitUntil: 'networkidle2' });
         await page.pdf({ 
             path: outputPath, 

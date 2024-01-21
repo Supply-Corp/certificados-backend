@@ -40,7 +40,7 @@ export class ConstancyService {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Document</title>
                 <style>
-                    @import url('https://fonts.googleapis.com/css?family=Great+Vibes');
+                    @import url('https://fonts.institutoelevateperu.com/fuente/fonts.css?family=YugothB');
 
                     body {
                         background-image: url('${ envs.WEB_SERVICE_URL }/templates/${ template }');
@@ -77,6 +77,7 @@ export class ConstancyService {
                         font-size: 38px;
                         margin: auto;
                         margin-top: 10px;
+                        font-family: "Yugoth";
                         text-transform: capitalize;
                     }
                     .p-two {
