@@ -72,7 +72,7 @@ export class ConstancyService {
                     }
                     h2 {
                         max-width: 650px;
-                        font-size: 38px;
+                        font-size: 34px;
                         margin: auto;
                         margin-top: 30px;
                         font-family: "Great Vibes";
