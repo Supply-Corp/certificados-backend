@@ -127,7 +127,7 @@ export class CertifiedService {
                     .p-four {
                         max-width: 830px;
                         display: block;
-                        margin: 30px auto 0;
+                        margin: 20px auto 0;
                         text-align: right;
                     }
                 </style>
