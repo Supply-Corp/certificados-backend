@@ -35,7 +35,6 @@ export class CertifiedService {
 
         const pathFile = path.resolve(__filename, '../vivaldi.font.txt');
         const pathFileGreat = path.resolve(__filename, '../great-vibes.font.txt');
-        console.log(pathFile)
 
         const vivaldiFont = fs.readFileSync(pathFile, { encoding: 'utf-8' });
         const greatVibesFont = fs.readFileSync(pathFileGreat, { encoding: 'utf-8' });
