@@ -15,23 +15,16 @@ export class ConstancyService {
     
     async generate(certified: UserCoursesModel) {
 
-        console.log(certified)
-
         const template = certified.template?.certifiedConstancy;
-
-        const dayInit = dayjs(certified.course?.initialDate).format('DD');
-        const monthInit = dayjs(certified.course?.initialDate).format('MMMM');
-
-        const dayEnd = dayjs(certified.course?.endDate).format('DD');
-        const monthEnd = dayjs(certified.course?.endDate).format('MMMM');
-        const yearEnd = dayjs(certified.course?.endDate).format('YYYY');
 
         const dayNow = dayjs().format('DD');
         const monthNow = dayjs().format('MMMM');
         const yearNow = dayjs().format('YYYY');
 
-        const qr = await QRCode.toDataURL(certified.identifier)
         const yearNowText = numeroALetras(+yearNow);
+
+        const pathFileGreat = path.resolve(__filename, '../great-vibes.font.txt');
+        const greatVibesFont = fs.readFileSync(pathFileGreat, { encoding: 'utf-8' });
 
         const htmlContent = `<!DOCTYPE html>
             <html lang="en">
@@ -41,7 +34,12 @@ export class ConstancyService {
                 <title>Document</title>
                 <style>
                     @import url('https://fonts.institutoelevateperu.com/fuente/fonts.css?family=YugothB');
-
+                    @font-face {
+                        font-family: 'Great Vibes';
+                        src: url(data:font/truetype;charset=utf-8;base64,${greatVibesFont}) format('truetype');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
                     body {
                         background-image: url('${ envs.WEB_SERVICE_URL }/templates/${ template }');
                         background-size: cover;
@@ -73,12 +71,12 @@ export class ConstancyService {
                         font-size: 16px;
                     }
                     h2 {
-                        max-width: 620px;
+                        max-width: 650px;
                         font-size: 38px;
                         margin: auto;
                         margin-top: 10px;
-                        font-family: "Yugoth";
-                        text-transform: capitalize;
+                        font-family: "Great Vibes";
+                        line-height: 40px;
                     }
                     .p-two {
                         display: block;
