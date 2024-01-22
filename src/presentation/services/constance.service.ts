@@ -85,7 +85,7 @@ export class ConstancyService {
                         text-align: left;
                         font-size: 18px;
                         margin: auto;
-                        margin-top: 18px;
+                        margin-top: 14px;
                     }
                     h3 {
                         max-width: 800px;
@@ -99,7 +99,7 @@ export class ConstancyService {
                     .p-four {
                         max-width: 620px;
                         display: block;
-                        margin: 10px auto 0;
+                        margin: 5px auto 0;
                         text-align: right;
                     }
                     .modules-box {
