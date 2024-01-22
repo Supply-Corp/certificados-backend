@@ -23,4 +23,5 @@ export const envs = {
     DATABASE_PORT: get('DATABASE_PORT').required().asPortNumber(),
     DATABASE_DIALECT: get('DATABASE_DIALECT').required().asString(),
     DATABASE_NAME: get('DATABASE_NAME').required().asString(),
+    TZ: get('TZ').required().asString(),
 }
