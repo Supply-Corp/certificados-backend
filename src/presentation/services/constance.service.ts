@@ -74,7 +74,7 @@ export class ConstancyService {
                         max-width: 650px;
                         font-size: 38px;
                         margin: auto;
-                        margin-top: 10px;
+                        margin-top: 20px;
                         font-family: "Great Vibes";
                         line-height: 40px;
                     }
