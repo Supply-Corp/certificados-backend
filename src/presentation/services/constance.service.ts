@@ -74,7 +74,7 @@ export class ConstancyService {
                         max-width: 650px;
                         font-size: 38px;
                         margin: auto;
-                        margin-top: 20px;
+                        margin-top: 30px;
                         font-family: "Great Vibes";
                         line-height: 40px;
                     }
@@ -91,19 +91,10 @@ export class ConstancyService {
                         max-width: 800px;
                         font-size: 30px;
                         margin: auto;
-                        margin-top: 50px;
+                        margin-top: 30px;
                         height: fit-content;
                         font-weight: 400;
                         text-align: center;
-                    }
-                    .p-tree {
-                        display: block;
-                        max-width: 620px;
-                        background: red;
-                        text-align: justify!important;
-                        margin: 10px auto 0;
-                        text-align: left;
-                        font-size: 16px;
                     }
                     .p-four {
                         max-width: 620px;
