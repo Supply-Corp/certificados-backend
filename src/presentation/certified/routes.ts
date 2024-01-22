@@ -11,7 +11,7 @@ export class CertifiedRoutes {
 
     const controller = new CertifiedController(service);
 
-    // router.get("/generate/:course", controller.generateCertified)
+    router.post("/search", controller.search)
 
     return router;
 

@@ -21,6 +21,7 @@ export class ServerRoutes {
     router.use("/api/certified", CertifiedRoutes.routes);
 
     router.use("/api/student", StudentRoutes.routes);
+    router.use("/api/search", StudentRoutes.routes);
 
     return router;
   }

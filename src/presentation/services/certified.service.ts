@@ -1,12 +1,13 @@
 import path from 'path';
 import fs from 'fs';
 import puppeteer from "puppeteer";
-import { CustomError, numeroALetras } from "../../domain";
+import { CustomError, UserCoursesEntity, numeroALetras } from "../../domain";
 import { envs } from "../../config";
 import { UserCoursesModel } from "../../domain/models";
 import dayjs from 'dayjs';
 import QRCode from 'qrcode'
 import 'dayjs/locale/es';
+import { Op } from 'sequelize';
 dayjs.locale('es')
 
 
@@ -182,5 +183,35 @@ export class CertifiedService {
         await browser.close();
 
         return `${identifier}.pdf`
+    }
+
+    async search( search: string ) {
+
+        const course = await UserCoursesModel.findOne({ 
+            where: {
+                ...( search.length <= 12 ? {
+                    identifier: {
+                        [Op.endsWith]: `${ search }`
+                    }
+                } : {
+                    identifier: search
+                })
+            },
+            include: ['user', 'course']
+        });
+        if( !course ) throw CustomError.notFound('No se encontró ningún certificado');
+
+        try {
+
+            const cleanCourse = course.toJSON();
+            const { password, recoveryPassword, role, ...user } = cleanCourse.user;
+            cleanCourse.user = user;
+
+            return UserCoursesEntity.fromObject(cleanCourse);
+        } catch (error) {
+            console.log(`${ error }`);
+            throw CustomError.badRequest(`${ error }`);
+        }
+
     }
 }
