@@ -2,7 +2,7 @@ export function numeroALetras(num: number): string {
     const unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
     const decenas = ['', 'diez', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
     const centenas = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
-    const especiales: { [key: string]: string } = { '11': 'once', '12': 'doce', '13': 'trece', '14': 'catorce', '15': 'quince' };
+    const especiales: { [key: string]: string } = { '11': 'once', '12': 'doce', '13': 'trece', '14': 'catorce', '15': 'quince', '16': 'dieciséis', '17': 'diecisiete', '18': 'dieciocho', '19': 'diecinueve' };
 
     if (num <= 10) {
         return unidades[num];
