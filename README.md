@@ -5,7 +5,7 @@ una vez clonado el repositorio:
 2 - cree un archivo llamado .env y pegue el contenido del archivo .env.template (punto 10 como crear archivo) </br>
 2.2 - complete el .env con la información necesaria. </br>
 3 - ejecute el comando: npm run build </br>
-4 - ejecute el comando: npm run prebuild </br>
+4 - ejecute el comando: npm run prepare </br>
 
 5 - instale pm2 con el siguiente comando: npm i -g pm2 </br>
 6 - asegúrese de que se creó una carpeta /dist en la raíz del proyecto </br>
