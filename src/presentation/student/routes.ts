@@ -4,6 +4,7 @@ import { SessionMiddleware } from "../middlewares";
 import { StudentController } from "./controller";
 import { CertifiedService } from "../services/certified.service";
 import { ConstancyService } from "../services/constance.service";
+import fileUpload from "express-fileupload";
 
 export class StudentRoutes {
 
@@ -21,6 +22,13 @@ export class StudentRoutes {
         router.get("/", controller.studentCourses);
         router.get("/certified/:identifier", controller.studentCertified);
         router.get("/constancy/:identifier", controller.studentConstancy);
+
+        router.use(fileUpload({
+          limits: { fileSize: 50 * 1024 * 1024 },
+          useTempFiles: true,
+        }));
+
+        router.post("/massive", controller.importStudents);
     
         return router;
       }
