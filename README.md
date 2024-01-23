@@ -1,7 +1,7 @@
 una vez clonado el repositorio:
 
 
-1 - instale las dependencias del proyecto ejecutando el comando: npm install.
+1 - instale las dependencias del proyecto ejecutando el comando: npm install.\n
 2 - cree un archivo llamado .env y pegue el contenido del archivo .env.template dentro del nuevo .env 
 3 - ejecute el comando: npm run build
 4 - ejecute el comando: npm run prebuild
