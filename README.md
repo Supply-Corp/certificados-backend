@@ -7,8 +7,11 @@ una vez clonado el repositorio:
 4 - ejecute el comando: npm run prebuild </br>
 
 5 - instale pm2 con el siguiente comando: npm i -g pm2 </br>
-6 - escribiendo...  </br>
+6 - asegúrese de que se creó una carpeta /dist en la raíz del proyecto </br>
+7 - ejecute el comando: pm2 start dist/app.js </br>
+8 - ejecute el comando: pm2 logs </br>
+9 - asegúrese de que no haya un error en la consola de logs </br>
 
 </br>
 </br>
-10 - escriba: nano "nombre del archivo a crear" ejemplo: nano .env
+10 - escriba: nano + "nombre del archivo a crear" ejemplo: nano .env
