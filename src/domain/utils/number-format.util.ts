@@ -9,10 +9,11 @@ export function numeroALetras(num: number): string {
     } else if (num <= 20) {
         return especiales[num.toString()] || decenas[Math.floor(num / 10)] + ' y ' + unidades[num % 10];
     } else if (num < 100) {
-        if(num === 20 || num === 30 || num === 30 || num === 40 || num === 50 || num === 60 || num === 70 || num === 80 || num === 90) {
-            return decenas[Math.floor(num / 10)] + (num % 10 !== 0 ? ' ' + unidades[num % 10] : '');
+        if (num > 20 && num < 30) {
+            return 'veinti' + unidades[num % 10];
+        } else {
+            return decenas[Math.floor(num / 10)] + (num % 10 !== 0 ? ' y ' + unidades[num % 10] : '');
         }
-        return decenas[Math.floor(num / 10)] + (num % 10 !== 0 ? ' y ' + unidades[num % 10] : '');
     } else if (num < 1000) {
         if (num === 100) {
             return 'cien';
