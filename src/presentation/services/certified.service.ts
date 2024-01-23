@@ -31,7 +31,7 @@ export class CertifiedService {
         const yearNow = dayjs().format('YYYY');
 
 
-        const qr = await QRCode.toDataURL(certified.identifier)
+        const qr = await QRCode.toDataURL(`${ envs.WEB_SERVICE_URL }/search-certificates?cert=${ certified.identifier }`)
         const hours = numeroALetras(certified.hours);
 
         const pathFile = path.resolve(__filename, '../vivaldi.font.txt');

@@ -21,8 +21,6 @@ export class ConstancyService {
         const monthNow = dayjs().format('MMMM');
         const yearNow = dayjs().format('YYYY');
 
-        const yearNowText = numeroALetras(+yearNow);
-
         const pathFileGreat = path.resolve(__filename, '../great-vibes.font.txt');
         const greatVibesFont = fs.readFileSync(pathFileGreat, { encoding: 'utf-8' });
 
@@ -117,7 +115,7 @@ export class ConstancyService {
                 </div>
 
                 <h3>${ certified.points }</h3>
-                <p class="p-four">Lima, a los ${ dayNow} días del mes de ${ monthNow } del año ${ yearNowText } </p>
+                <p class="p-four">Lima, a los ${ dayNow} días del mes de ${ monthNow } del año ${ yearNow } </p>
             </body>
         </html>`;
 
