@@ -32,7 +32,7 @@ export class UserCoursesService {
           ...(search && {
             [Op.and]: {
               name: {
-                startsWith: `%${search}`,
+                [Op.like]: `%${search}%`,
               },
             },
           }),
