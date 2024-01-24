@@ -109,7 +109,7 @@ export class CertifiedService {
                     }
                     h3 {
                         max-width: 830px;
-                        font-size: 40px;
+                        font-size: 36px;
                         margin-top: 20px;
                         margin: auto;
                         height: fit-content;
@@ -121,7 +121,7 @@ export class CertifiedService {
                         display: block;
                         max-width: 830px;
                         text-align: justify!important;
-                        margin: 10px auto 0;
+                        margin: 5px auto 0;
                         text-align: left;
                         font-size: 16px;
                     }
