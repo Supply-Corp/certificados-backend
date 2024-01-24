@@ -21,7 +21,7 @@ export class StudentService {
 
         try {
 
-            const courses = await UserCoursesModel.findAll({ where: { userId: id }, include: ['course']});
+            const courses = await UserCoursesModel.findAll({ where: { userId: id }, include: ['course', 'template']});
 
             return {
                 courses: courses.map(UserCoursesEntity.fromObject)
