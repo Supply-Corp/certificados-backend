@@ -28,7 +28,8 @@ TemplatesModel.init(
         type: DataTypes.STRING
       },
       certifiedConstancy: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true
       },
       state: {
         type: DataTypes.ENUM,

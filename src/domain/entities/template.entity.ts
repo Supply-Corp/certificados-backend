@@ -10,8 +10,9 @@ export class TemplateEntity {
         public readonly id: number,
         public readonly name: string,
         public readonly certified: string,
-        public readonly certifiedConstancy: string,
         public readonly state: States,
+        public readonly certifiedConstancy?: string,
+
 
         public readonly createdAt?: Date,
         public readonly updatedAt?: Date,
@@ -26,7 +27,7 @@ export class TemplateEntity {
         if( !certified ) throw 'missing certified';
         if( !state ) throw 'missing state';
     
-        return new TemplateEntity( id, name, certified, certifiedConstancy, state, createdAt, updatedAt );
+        return new TemplateEntity( id, name, certified, state, certifiedConstancy, createdAt, updatedAt );
     }
 
 }
