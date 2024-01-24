@@ -109,11 +109,11 @@ export class CertifiedService {
                     }
                     h3 {
                         max-width: 830px;
-                        font-size: 36px;
-                        margin-top: 20px;
+                        font-size: 35px;
+                        margin-top: 15px;
                         margin: auto;
                         height: fit-content;
-                        line-height: 50px;
+                        line-height: 40px;
                         font-family: 'Great Vibes';
                         
                     }
