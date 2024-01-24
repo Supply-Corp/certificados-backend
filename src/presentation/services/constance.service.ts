@@ -70,11 +70,11 @@ export class ConstancyService {
                     }
                     h2 {
                         max-width: 650px;
-                        font-size: 34px;
+                        font-size: 30px;
                         margin: auto;
                         margin-top: 15px;
                         font-family: "Great Vibes";
-                        line-height: 40px;
+                        line-height: 30px;
                     }
                     .p-two {
                         display: block;
@@ -83,13 +83,13 @@ export class ConstancyService {
                         text-align: left;
                         font-size: 18px;
                         margin: auto;
-                        margin-top: 14px;
+                        margin-top: 8px;
                     }
                     h3 {
                         max-width: 800px;
                         font-size: 30px;
                         margin: auto;
-                        margin-top: 30px;
+                        margin-top: 20px;
                         height: fit-content;
                         font-weight: 400;
                         text-align: center;
@@ -98,7 +98,6 @@ export class ConstancyService {
                         max-width: 620px;
                         display: block;
                         margin: 5px auto 0;
-                        text-align: right;
                     }
                     .modules-box {
                         margin-top: 10px;
