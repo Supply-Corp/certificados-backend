@@ -34,6 +34,9 @@ export class UserCoursesService {
               name: {
                 [Op.like]: `%${search}%`,
               },
+              documentNumber: {
+                [Op.like]: `%${search}%`,
+              },
             },
           }),
           role: 'USER'
