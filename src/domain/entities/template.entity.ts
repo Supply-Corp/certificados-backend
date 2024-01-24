@@ -24,7 +24,6 @@ export class TemplateEntity {
         if( !id ) throw 'missing id';
         if( !name ) throw 'missing name';
         if( !certified ) throw 'missing certified';
-        if( !certifiedConstancy ) throw 'missing certifiedConstancy';
         if( !state ) throw 'missing state';
     
         return new TemplateEntity( id, name, certified, certifiedConstancy, state, createdAt, updatedAt );
