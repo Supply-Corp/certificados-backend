@@ -30,11 +30,18 @@ export class UserCoursesService {
         limit: limit,
         where: {
           ...(search && {
-            [Op.and]: {
-              name: {
-                [Op.like]: `%${search}%`,
+            [Op.or]: [
+              {
+                name: {
+                  [Op.like]: `%${search}%`,
+                },
               },
-            },
+              {
+                documentNumber: {
+                  [Op.like]: `%${search}%`,
+                },
+              },
+            ],
           }),
           role: 'USER'
         },
