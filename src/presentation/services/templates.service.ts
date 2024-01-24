@@ -80,7 +80,7 @@ export class TemplatesService {
             const template = await TemplatesModel.create({
                 name: dto.name,
                 certified: fileNames[0].fileName,
-                certifiedConstancy: fileNames[1].fileName
+                certifiedConstancy: fileNames[1].fileName ? fileNames[1].fileName : null
             });
 
             return {
