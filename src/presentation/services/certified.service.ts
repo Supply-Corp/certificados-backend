@@ -86,7 +86,7 @@ export class CertifiedService {
                         display: block;
                         max-width: 830px;
                         text-align: justify!important;
-                        margin: 100px auto 0;
+                        margin: 90px auto 0;
                         text-align: left;
                         font-size: 16px;
                     }
