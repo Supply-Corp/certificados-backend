@@ -62,7 +62,7 @@ export class CertifiedService {
                     }
 
                     body {
-                        background-image: url('${ envs.WEB_SERVICE_URL }/templates/${ template }');
+                        background-image: url('${ envs.WEB_TEMPLATE_URL }/templates/${ template }');
                         background-size: cover;
                         text-align: center;
                         margin: 0;

@@ -16,6 +16,7 @@ export const envs = {
     MAILER_SECRET: get('MAILER_SECRET').required().asString(),
 
     WEB_SERVICE_URL: get('WEB_SERVICE_URL').required().asString(),
+    WEB_TEMPLATE_URL: get('WEB_TEMPLATE_URL').required().asString(),
 
     DATABASE_HOST: get('DATABASE_HOST').required().asString(),
     DATABASE_USER: get('DATABASE_USER').required().asString(),

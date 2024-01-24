@@ -180,8 +180,6 @@ export class TemplatesService {
                 state: 'DELETED'
             });
             
-            // await this.removeFile( exist.file );
-
             return {
                 ...TemplateEntity.fromObject(update)
             }
