@@ -92,7 +92,7 @@ export class CertifiedService {
                     }
                     h2 {
                         font-size: 56px;
-                        margin-top: 10px;
+                        margin-top: 5px;
                         text-transform: capitalize;
                         font-family: 'Vivaldi'!important;
                         font-weight: 300;
