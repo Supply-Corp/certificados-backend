@@ -4,7 +4,7 @@ export class FileUploadMiddleware {
 
     static containFiles(req: Request, res: Response, next: NextFunction) {
 
-        if( !req.files || Object.keys(req.files).length === 0 || Object.keys(req.files).length < 2) {
+        if( !req.files || Object.keys(req.files).length === 0 || Object.keys(req.files).length < 1) {
             return res.status(400).json({ error: 'Uno o mas de los archivos requerido no ha sido' });
         }
     
