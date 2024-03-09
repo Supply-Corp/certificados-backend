@@ -36,9 +36,11 @@ export class CertifiedService {
 
         const pathFile = path.resolve(__filename, '../vivaldi.font.txt');
         const pathFileGreat = path.resolve(__filename, '../great-vibes.font.txt');
+        const pathYugoth = path.resolve(__filename, '../yugoth.font.txt');
 
         const vivaldiFont = fs.readFileSync(pathFile, { encoding: 'utf-8' });
         const greatVibesFont = fs.readFileSync(pathFileGreat, { encoding: 'utf-8' });
+        const yuGothFont = fs.readFileSync(pathYugoth, { encoding: 'utf-8' });
 
 
         const htmlContent = `<!DOCTYPE html>
@@ -60,6 +62,12 @@ export class CertifiedService {
                         font-weight: normal;
                         font-style: normal;
                     }
+                    @font-face {
+                        font-family: 'Yugoth';
+                        src: url(data:font/truetype;charset=utf-8;base64,${yuGothFont}) format('truetype');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
 
                     body {
                         background-image: url('${ envs.WEB_TEMPLATE_URL }/templates/${ template }');
@@ -67,6 +75,7 @@ export class CertifiedService {
                         text-align: center;
                         margin: 0;
                         padding:0;
+                        font-family: 'Yugoth';
                     }
                     img {
                         margin-top: 60px;
