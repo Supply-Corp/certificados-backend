@@ -22,7 +22,10 @@ export class ConstancyService {
         const yearNow = dayjs().format('YYYY');
 
         const pathFileGreat = path.resolve(__filename, '../great-vibes.font.txt');
+        const pathYugoth = path.resolve(__filename, '../yugoth.font.txt');
+        
         const greatVibesFont = fs.readFileSync(pathFileGreat, { encoding: 'utf-8' });
+        const yuGothFont = fs.readFileSync(pathYugoth, { encoding: 'utf-8' });
 
         const htmlContent = `<!DOCTYPE html>
             <html lang="en">
@@ -38,12 +41,20 @@ export class ConstancyService {
                         font-weight: normal;
                         font-style: normal;
                     }
+                    @font-face {
+                        font-family: 'Yugoth';
+                        src: url(data:font/truetype;charset=utf-8;base64,${yuGothFont}) format('truetype');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
+
                     body {
                         background-image: url('${ envs.WEB_TEMPLATE_URL }/templates/${ template }');
                         background-size: cover;
                         text-align: center;
                         margin: 0;
                         padding:0;
+                        font-family: 'Yugoth'!important;
                     }
                     img {
                         margin-top: 60px;

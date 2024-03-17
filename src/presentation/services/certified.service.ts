@@ -98,6 +98,7 @@ export class CertifiedService {
                         margin: 90px auto 0;
                         text-align: left;
                         font-size: 16px;
+                        line-height: 20px;
                     }
                     h2 {
                         font-size: 56px;
@@ -133,6 +134,7 @@ export class CertifiedService {
                         margin: 5px auto 0;
                         text-align: left;
                         font-size: 16px;
+                        line-height: 20px;
                     }
                     .p-four {
                         max-width: 830px;
@@ -171,9 +173,9 @@ export class CertifiedService {
 
     async generatePDF(htmlContent: string, outputPath: string, identifier: string) {
 
-        const destination = path.resolve(__dirname, '../../../public/certified');
+        // const destination = path.resolve(__dirname, '../../../public/certified');
 
-        if(!fs.existsSync( destination )) fs.mkdirSync( destination );
+        // if(!fs.existsSync( destination )) fs.mkdirSync( destination );
         
         const browser = await puppeteer.launch({ 
             headless: 'new',
